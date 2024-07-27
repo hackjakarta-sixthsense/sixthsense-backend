@@ -1,4 +1,4 @@
-package sixthsense_backend.sixthsense_backend;
+package sixthsense.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
