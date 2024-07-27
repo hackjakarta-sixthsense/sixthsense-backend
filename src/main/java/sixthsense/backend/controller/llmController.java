@@ -15,7 +15,7 @@ public class llmController {
 
     private final LlmService llmService;
 
-    @PostMapping
+    @RequestMapping("/prompt")
     public ResponseEntity<SearchResponse> searchPrompt(@RequestBody String prompt) {
         return ResponseEntity.ok(llmService.sendPrompt(prompt));
     }

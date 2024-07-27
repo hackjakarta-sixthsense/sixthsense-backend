@@ -43,10 +43,25 @@ public class LlmService {
                 .bodyToMono(LlmResponse.class)
                 .block();
 
-        return SearchResponse
-                .builder()
-                .value(Validator.isNotNullOrEmpty(llmResponse)?llmResponse.getResponse(): null)
-                .build();
+        if (Validator.isNotNullOrEmpty(llmResponse)){
+            return mappingData(llmResponse);
+        }else {
+            return null;
+        }
+    }
+
+
+    public SearchResponse mappingData(LlmResponse llmResponse){
+        String response = llmResponse.getResponse();
+        String newLineRegex = "\n";
+        SearchResponse searchResponse = new SearchResponse();
+        String[] parts = response.split("[,\\\\.]");
+
+        searchResponse.setValueRegex(parts[0]);
+        searchResponse.setCategoryRegex(parts[1].replaceAll( newLineRegex, "").replaceAll( " ", ""));
+        searchResponse.setValue(response);
+        searchResponse.setCategory(response);
+        return searchResponse;
     }
 
 
