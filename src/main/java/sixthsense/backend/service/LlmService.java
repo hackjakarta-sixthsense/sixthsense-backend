@@ -32,7 +32,7 @@ public class LlmService {
         LlmRequest searchRequest = new LlmRequest();
         searchRequest.setModel(llmType);
         searchRequest.setStream(false);
-        searchRequest.setPrompt(prompt + " -> Please response with 2 sentences in one line separated with one period. the first sentence is the value of what user want, its either type of food or location, and just state the value (example: ayam bakar, nasi padang, bni city, stasiun sudirman). the second one is the category, either food or location, and just state the category (for example: food, location)");
+        searchRequest.setPrompt(prompt + " -> Please response with 3 sentences in one line separated with one period. the first sentence is the value of what user want, its either type of food or location, and just state the value (example: ayam bakar, nasi padang, bni city, stasiun sudirman). the second one is the category, either food or location, and just state the category (for example: food, location). -> Please response with 3 sentences in one line separated with one period. the first sentence is the value of what user want, its either type of food or location, and just state the value (example: ayam bakar, nasi padang, bni city, stasiun sudirman). the third one is the option type, either bike or car, and just state the option (for example: car, bike)");
 
         LlmResponse llmResponse = webClientBuilder.build()
                 .post()
@@ -61,6 +61,7 @@ public class LlmService {
         searchResponse.setCategoryRegex(parts[1].replaceAll( newLineRegex, "").replaceAll( " ", ""));
         searchResponse.setValue(response);
         searchResponse.setCategory(response);
+        searchResponse.setOptionRegex(parts[2].replaceAll( newLineRegex, "").replaceAll( " ", ""));
         return searchResponse;
     }
 

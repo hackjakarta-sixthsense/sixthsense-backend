@@ -14,4 +14,5 @@ public class SearchResponse {
     private String category;
     private String valueRegex;
     private String categoryRegex;
+    private String optionRegex;
 }
